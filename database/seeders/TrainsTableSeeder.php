@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Train;
+use Faker\Generator as Faker;
 
 class TrainsTableSeeder extends Seeder
 {
@@ -13,16 +14,18 @@ class TrainsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $newTrain = new Train();
-        $newTrain->azienda = 'Italo';
-        $newTrain->stazione_partenza = 'Venezia';
-        $newTrain->stazione_arrivo = 'Napoli';
-        $newTrain->orario_di_partenza = '8:32:40';
-        $newTrain->orario_di_arrivo = '14:27:10';
-        $newTrain->codice_treno = 231413;
-        $newTrain->stato = 'in orario';
+        for ($i=0; $i < 100; $i++) { 
+            $newTrain = new Train();
+        $newTrain->azienda = $faker->randomElement(['Trenitalia', 'Italo']);
+        $newTrain->stazione_partenza = $faker->randomElement(['Roma', 'Milano', 'Firenze', 'Torino', 'Venezia', 'Napoli']);
+        $newTrain->stazione_arrivo = $faker->randomElement(['Roma', 'Milano', 'Firenze', 'Torino', 'Venezia', 'Napoli']);
+        $newTrain->orario_di_partenza = $faker->time();
+        $newTrain->orario_di_arrivo = $faker->time();
+        $newTrain->codice_treno = $faker->randomNumber(7);
+        $newTrain->stato = $faker->randomElement(['in orario', 'in ritardo', 'cancellato']);
         $newTrain->save();
+        }
     }
 }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->enum('azienda', ['Trenitalia', 'Italo']);
             $table->enum('stazione_partenza', ['Roma', 'Milano', 'Firenze', 'Torino', 'Venezia', 'Napoli']);
             $table->enum('stazione_arrivo', ['Roma', 'Milano', 'Firenze', 'Torino', 'Venezia', 'Napoli']);
-            $table->dateTime('orario_di_partenza');
-            $table->dateTime('orario_di_arrivo');
+            $table->string('orario_di_partenza');
+            $table->string('orario_di_arrivo');
             $table->unsignedInteger('codice_treno')->unique();
             $table->enum('stato', ['in orario', 'in ritardo', 'cancellato']);
             $table->timestamps();
